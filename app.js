@@ -10,7 +10,7 @@ app.use(express.static("public"));
 // const items = ["buy","eat"];
 // const workItems =[];
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://admin-lakshay:Aayushbatra1@@cluster0-qgflw.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect("mongodb+srv://admin-lakshay:Aayushbatra1@@cluster0-qgflw.mongodb.net/todolistDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 //items schema
 const itemsSchema = {
