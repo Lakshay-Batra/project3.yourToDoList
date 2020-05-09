@@ -1,6 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const https = require("https");
 const date = require(__dirname + "/date.js");
 const _ = require("lodash");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,7 +12,7 @@ app.use(express.static("public"));
 // const items = ["buy","eat"];
 // const workItems =[];
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://admin-lakshay:Aayushbatra1@@cluster0-qgflw.mongodb.net/todolistDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect("mongodb://localhost:27017/todolistDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 //items schema
 const itemsSchema = {
@@ -114,6 +116,37 @@ app.get("/:listName", (req, res) => {
     })
 
 });
+
+/////////////////////////////////////////////// weather route //////////////////////////////////////////////
+app.post("/weather", (req, res) => {
+    var city = req.body.city;
+    var appId = process.env.WEATHER_API_KEY;
+    var unit = "metric";
+    var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + unit + "&appid=" + appId;
+        https.get(url, (response) => {
+            console.log(response.statusCode);
+            if(response.statusCode == 200 ) {
+                response.on("data" , (data) => {
+                    var weatherData=JSON.parse(data);
+                    var weatherIconCode = weatherData.weather[0].icon;
+                    var weatherObject = {
+                        "city" : weatherData.name,
+                        "country" : weatherData.sys.country,
+                        "temp" : weatherData.main.temp,
+                        "weatherMain":weatherData.weather[0].main,
+                        "weatherDescription" : weatherData.weather[0].description,
+                        "pressure": weatherData.main.pressure,
+                        "humidity" : weatherData.main.humidity,
+                        "wind": weatherData.wind.speed,
+                        "iconUrl" : "http://openweathermap.org/img/wn/" + weatherIconCode + "@2x.png"
+                    };
+                    res.render("weather",{weatherObject:weatherObject});
+                });
+            } else {
+                res.redirect("/");
+            }
+        });
+}); 
 
 
 app.listen(process.env.PORT || 3000, (req, res) => {

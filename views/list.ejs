@@ -1,6 +1,22 @@
-<%- include("header") %>
+<%- include("partials/header") %>
 
-<div class="box" id="heading">
+<div class="header container bg-light mt-2">
+    <div class="d-flex align-items-center bg-light justify-content-between">
+        <div class="text-left">
+            <span>&#8801;</span>
+        </div>
+        <div class="text-center">
+            <form class="form-inline justify-content-center" action="/weather" method="POST">
+                <label>Check Weather</label>&emsp;
+                <input type="text" class="form-control ml-3" id="weatherInput" name="city"
+                    placeholder="Enter city Name">&emsp;
+                <button class="btn-dark" type="submit">Go</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="box bg-dark text-center" id="heading">
     <h1><%= listTitle %> </h1>
 </div>
 <div class="box">
@@ -8,15 +24,15 @@
         <% newItems.forEach((item) => { %>
         <div class="item">
             <input type="checkbox" name="checkbox" value="<%= item._id %>" onChange="this.form.submit()">
-            <p><%= item.task %></p>
+            <p id="task"><%= item.task %></p>
         </div>
         <% }); %>
         <input type="hidden" name="listName" value="<%= listTitle %>"></input:null>
     </form>
     <form class="item" action="/" method="post">
         <input type="text" name="newTask" placeholder="Enter new task here" autocomplete="off" required>
-        <button class="add" type="submit" name="switch" value="<%= listTitle %>">+</button>
+        <button class="add btn-dark" type="submit" name="switch" value="<%= listTitle %>">+</button>
     </form>
 </div>
 
-<%- include("footer") %>
+<%- include("partials/footer") %>
