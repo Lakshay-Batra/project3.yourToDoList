@@ -1,6 +1,7 @@
 exports.getDate= () => {
     const today = new Date();
     const options = {
+        timeZone: "Asia/Kolkata",
         weekday: 'long',
         month: 'long',
         day: 'numeric'
@@ -10,7 +11,8 @@ exports.getDate= () => {
 exports.getDay= () => {
     const today = new Date();
     const options = {
-        weekday: 'long',
+        timeZone: "Asia/Kolkata",
+        weekday: 'long'
     }
     return today.toLocaleDateString("en-US",options);
 };
