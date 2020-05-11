@@ -194,7 +194,11 @@ app.post("/delete", (req, res) => {
 
 app.post("/createList", (req, res) => {
     if (req.isAuthenticated()) {
-        const listName = _.capitalize(req.body.listName);
+        let listName = req.body.listName;
+        if(_.startsWith(listName," ") || _.endsWith(listName," ")) {
+            listName = _.trim(listName);
+        }
+        listName = _.capitalize(listName);
         User.findOne({ _id: req.user._id }, (err, foundUser) => {
             if (!err) {
                 if (foundUser) {
