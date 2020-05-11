@@ -106,6 +106,8 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+/////////////////////////////////////////////// home route //////////////////////////////////////////////
+
 app.get("/", (req, res) => {
     const day = date.getDate();
     if (req.isAuthenticated()) {
@@ -144,6 +146,8 @@ app.get("/", (req, res) => {
     // });
 });
 
+/////////////////////////////////////////////// post-home route to submit new task route //////////////////////////////////////////////
+
 app.post("/", (req, res) => {
     if (req.isAuthenticated()) {
         const newTask = req.body.newTask;
@@ -178,6 +182,8 @@ app.post("/", (req, res) => {
 
 });
 
+/////////////////////////////////////////////// delete-task route //////////////////////////////////////////////
+
 app.post("/delete", (req, res) => {
     if (req.isAuthenticated()) {
         const id = req.body.checkbox;
@@ -201,6 +207,8 @@ app.post("/delete", (req, res) => {
 
 
 });
+
+/////////////////////////////////////////////// createList route //////////////////////////////////////////////
 
 app.post("/createList", (req, res) => {
     if (req.isAuthenticated()) {
@@ -238,6 +246,7 @@ app.post("/createList", (req, res) => {
 
 });
 
+/////////////////////////////////////////////// specific list route //////////////////////////////////////////////
 app.get("/lists/:listName", (req, res) => {
     if (req.isAuthenticated()) {
         const customListName = _.capitalize(req.params.listName);
