@@ -143,7 +143,6 @@ button.addListBtn {
 footer {
   padding: 1%;
   text-align: center;
-  flex-shrink: 0;
 }
 
 @media (max-width: 775px) {

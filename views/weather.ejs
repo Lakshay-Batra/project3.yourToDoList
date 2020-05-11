@@ -1,11 +1,10 @@
 <%- include("partials/header") %>
-<div class="d-flex flex-column justify-content-center align-items-stretch" style="min-height: 100%;">
 <div class="box">
     <div>
         <div class="d-flex justify-content-around bg-warning opaque">
             <div class="d-flex align-items-center">
                 <h1 class="text-dark"><%= weatherObject.city %></h2>
-                <span><%= weatherObject.country %></span>
+                    <span><%= weatherObject.country %></span>
             </div>
             <img src="<%= weatherObject.iconUrl %>" alt="weather icon">
         </div>
@@ -17,7 +16,8 @@
             </div>
             <table>
                 <tr>
-                    <td colspan="2" class="border border-top-0 border-left-0 border-right-0 border-info">Details</td>
+                    <td colspan="2" class="border border-top-0 border-left-0 border-right-0 border-info">Details
+                    </td>
                 </tr>
                 <tr>
                     <td>Description</td>
@@ -39,11 +39,11 @@
         </div>
     </div>
 </div>
-<div class="box">
+<div class="box" style="margin-bottom: 11.55rem;">
     <form>
         <input class="btn btn-dark btn-block" type="button" value="Go back!" onclick="history.back()">
     </form>
 </div>
-</div>
+
 
 <%- include("partials/footer") %>
