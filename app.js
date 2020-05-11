@@ -21,7 +21,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/todolistDB", { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect(process.env.MONGODB_CLUSTER_LINK, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const itemSchema = new mongoose.Schema({
     task: String
@@ -129,21 +129,6 @@ app.get("/", (req, res) => {
     } else {
         res.redirect("/login");
     }
-    // const day = date.getDate();
-    // Item.find((err, foundItems) => {
-    //     if (foundItems.length == 0) {
-    //         Item.insertMany(defaultItems, (err) => {
-    //             if (!err) {
-    //                 res.redirect("/");
-    //             }
-    //             else {
-    //                 console.log(err);
-    //             }
-    //         });
-    //     } else {
-    //         res.render("list", { listTitle: day, newItems: foundItems });
-    //     }
-    // });
 });
 
 /////////////////////////////////////////////// post-home route to submit new task route //////////////////////////////////////////////
@@ -167,13 +152,6 @@ app.post("/", (req, res) => {
                     res.redirect("/lists/" + listTitle);
                 }
             });
-            // List.findOne({ name: listTitle }, (err, foundList) => {
-            //     if (!err) {
-            //         foundList.items.push(newitem);
-            //         foundList.save();
-            //         res.redirect("/" + listTitle);
-            //     }
-            // });
         }
     } else {
         res.redirect("/login");
@@ -272,23 +250,6 @@ app.get("/lists/:listName", (req, res) => {
     } else {
         res.redirect("/login");
     }
-
-    // List.findOne({ name: customListName }, (err, foundList) => {
-    //     if (!err) {
-    //         if (!foundList) {
-    //             const newList = new List({
-    //                 name: customListName,
-    //                 items: defaultItems
-    //             });
-    //             newList.save();
-    //             res.redirect("/" + customListName);
-    //         } else {
-    //             res.render("list", { listTitle: customListName, newItems: foundList.items });
-    //         }
-
-    //     }
-    // })
-
 });
 
 //////////////////////////////////////////////// delete list /////////////////////////////////////////////////////
